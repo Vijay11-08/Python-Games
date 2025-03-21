@@ -1,4 +1,4 @@
-# 🎮🔥 7 Exciting Python Games 🚀🕹️
+# 🎮🔥 8 Exciting Python Games 🚀🕹️
 
 ## 1. ♟️ AI Chess Battle 🤖🎭
 **Welcome to AI Chess Battle!** A chess game built using **Pygame** and powered by the **Stockfish engine** for AI moves. Challenge yourself against an intelligent AI and improve your chess strategies! 🏆🧠
@@ -77,6 +77,17 @@ A **top-down 2D shooter** where you must survive **waves of zombies**! Defeat en
 
 ---
 
+## 8. ⏳💰 Time Travel Heist - The Ultimate Time-Bending Adventure! 🚀🔥
+**Welcome to Time Travel Heist!** Become the greatest time-traveling thief of all time! 🌍✨ Jump through different eras of history 🏺⚔️🤖, steal legendary artifacts 💎🗝️, and outsmart the guards 👮‍♂️🚨. But beware – time paradoxes 🌀 can rewrite history! 😱 Can you pull off the perfect heist?
+
+### Features:
+- 🌀 Time travel mechanics across different historical eras ⏳
+- 💎 Collect and steal legendary artifacts 🗝️
+- 👀 Outsmart AI-powered guards 🚨
+- 🎮 Thrilling heist missions with a gripping storyline 📜
+
+---
+
 ## 🔧 Installation & Setup 🖥️⚙️
 1. 📥 Clone the repository:
    ```bash
@@ -97,5 +108,6 @@ A **top-down 2D shooter** where you must survive **waves of zombies**! Defeat en
 
 ## 🚀 Contributing 💡🛠️
 We welcome contributions! Feel free to submit **pull requests**, report issues, or suggest new features. 📝✨
+
 
 🎉 **Happy gaming!** 🎮🔥🚀
