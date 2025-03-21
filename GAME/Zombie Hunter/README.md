@@ -6,12 +6,12 @@ A thrilling top-down 2D shooter where you must survive waves of zombies! Defeat 
 
 ## 📌 Features
 
-✅ **Top-down 2D Shooter** – Move, aim, and shoot zombies from a top-down perspective.
-✅ **Endless Waves** – Survive increasing zombie waves that get harder each round. 🏆
-✅ **AI Pathfinding** – Zombies chase you down dynamically! 🧠
-✅ **Weapon System** – Fire bullets at incoming zombies and take them down! 🔥
-✅ **Health System** – Manage your health; don't let zombies catch you! ❤️
-✅ **Simple & Fun Gameplay** – Easy to pick up, hard to master! 🎮
+- ✅ **Top-down 2D Shooter** – Move, aim, and shoot zombies from a top-down perspective.
+- ✅ **Endless Waves** – Survive increasing zombie waves that get harder each round. 🏆
+- ✅ **AI Pathfinding** – Zombies chase you down dynamically! 🧠
+- ✅ **Weapon System** – Fire bullets at incoming zombies and take them down! 🔥
+- ✅ **Health System** – Manage your health; don't let zombies catch you! ❤️
+- ✅ **Simple & Fun Gameplay** – Easy to pick up, hard to master! 🎮
 
 ---
 
