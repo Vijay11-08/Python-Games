@@ -1,5 +1,6 @@
 import random
 import customtkinter as ctk
+import tkinter as tk
 from tkinter import messagebox
 
 # Initialize the main window with colorful theme
@@ -35,11 +36,13 @@ def check_guess():
             hint.append("🔴")  # Wrong number (Red)
 
     # Update attempts and UI
-    attempts_label.configure(text=f"🎯 Attempts Left: {attempts-1}", fg_color="#FF5733")
+    attempts -= 1  # Reduce attempts before updating UI
+    attempts_label.configure(text=f"🎯 Attempts Left: {attempts}", fg_color="#FF5733")
+    
+    # Insert guess results with emoji-friendly font
     attempts_listbox.insert("1.0", f"🔢 Guess: {guess} → {' '.join(hint)}\n")
     attempts_listbox.yview_moveto(0)  # Scroll to top
 
-    attempts -= 1
     if attempts == 0:
         messagebox.showinfo("😢 Game Over", f"You lost! The secret code was {secret_code} 🎭")
         reset_game()
@@ -50,7 +53,7 @@ def reset_game():
     secret_code = str(random.randint(1000, 9999))
     attempts = 10
     attempts_label.configure(text="🎯 Attempts Left: 10", fg_color="#FFC300")
-    attempts_listbox.delete("1.0", ctk.END)
+    attempts_listbox.delete("1.0", tk.END)
 
 # Create main window
 app = ctk.CTk()
@@ -59,10 +62,10 @@ app.geometry("450x550")
 app.configure(fg_color="#1F1F1F")  # Dark Background
 
 # UI Elements with Colors
-title_label = ctk.CTkLabel(app, text="🔐 Code Breaker 🔐", font=("Arial Black", 28), text_color="#00FF99")
+title_label = ctk.CTkLabel(app, text="🔐 Code Breaker 🔐", font=("Segoe UI Emoji", 24), text_color="#00FF99")
 title_label.pack(pady=15)
 
-entry_guess = ctk.CTkEntry(app, placeholder_text="💡 Enter 4-digit guess", font=("Arial", 18), fg_color="#282828", text_color="#FFD700")
+entry_guess = ctk.CTkEntry(app, placeholder_text="💡 Enter 4-digit guess", font=("Segoe UI Emoji", 18), fg_color="#282828", text_color="#FFD700")
 entry_guess.pack(pady=10)
 
 check_button = ctk.CTkButton(app, text="✅ Check Guess", command=check_guess, fg_color="#008080", hover_color="#006666", font=("Arial", 16))
@@ -71,7 +74,8 @@ check_button.pack(pady=10)
 attempts_label = ctk.CTkLabel(app, text="🎯 Attempts Left: 10", font=("Arial", 16), text_color="#FFC300")
 attempts_label.pack(pady=5)
 
-attempts_listbox = ctk.CTkTextbox(app, height=200, width=350, font=("Arial", 14), fg_color="#2B2B2B", text_color="white", border_color="#FFD700", border_width=2)
+# **Use tkinter.Text instead of CTkTextbox**
+attempts_listbox = tk.Text(app, height=10, width=50, font=("Segoe UI Emoji", 14), bg="#2B2B2B", fg="white", borderwidth=2)
 attempts_listbox.pack(pady=10)
 
 reset_button = ctk.CTkButton(app, text="🔄 Restart Game", command=reset_game, fg_color="#FF4500", hover_color="#B22222", font=("Arial", 16))
