@@ -1,74 +1,47 @@
-# AI Chess Game Using Pygame & Stockfish
+# 🎮 My Python Games 🚀🔥
 
-This is an AI-powered Chess game built using **Pygame** and **Stockfish**. The player plays as **White**, and the AI (Stockfish) plays as **Black**.
+## 1⃣ AI Chess ♟️🤖
+**Description:** A Python-based AI Chess game using the `pygame` and `python-chess` libraries. It includes an AI opponent powered by the Stockfish chess engine.
 
----
-## 🛠️ Installation
+**✨ Features:**
+- 🎨 Interactive chessboard with piece movement.
+- 🤖 AI opponent with Stockfish integration.
+- 🔍 Valid move highlighting.
+- 🏆 Game result detection (Checkmate, Stalemate, etc.).
 
-### **1️⃣ Install Dependencies**
-Make sure you have **Python 3.8+** installed. Then, install the required libraries:
-```sh
-pip install pygame chess
-```
+**🛠️ Installation & How to Play:**
+1. 📅 Install dependencies: `pip install pygame chess`
+2. 🔧 Download and configure Stockfish.
+3. ▶️ Run the script: `python Chess.py`
+4. 🎭 Play against AI or manually move pieces!
 
-### **2️⃣ Download Stockfish Engine**
-- Download **Stockfish Chess Engine** from [official site](https://stockfishchess.org/download/).
-- Extract the folder and copy the path of the Stockfish executable (`.exe` on Windows, or `.bin` on Linux/Mac).
-
-### **3️⃣ Clone the Repository**
-```sh
-git clone https://github.com/yourusername/ai-chess-game.git
-cd ai-chess-game
-```
-
-### **4️⃣ Set Stockfish Path**
-Update the `STOCKFISH_PATH` variable in the script to the path where you downloaded Stockfish.
-
-Example:
-```python
-STOCKFISH_PATH = r"C:\Users\YourName\Downloads\stockfish\stockfish-windows-x86-64-avx2.exe"
-```
-
-### **5️⃣ Run the Game**
-```sh
-python ai_chess.py
-```
+![alt text](image.png)
 
 ---
-## 🎮 How to Play
 
-- **Select a Piece:** Click on a white piece to see its valid moves.
-- **Move the Piece:** Click on a valid square to move it.
-- **AI Moves Automatically:** After your move, the AI (Stockfish) will respond.
-- **Game Over:** Checkmate, stalemate, or insufficient material will end the game.
+## 2⃣ Code Breaker 🔐🕹️
+**Description:** "Code Breaker" is a logic-based puzzle game where players must decode a secret number or word using clues and patterns. The game challenges problem-solving skills while keeping it fun and engaging.
 
+**✨ Features:**
+- 🎲 Randomized secret codes for fresh gameplay.
+- 💡 Hint system: 
+  - 🔵 Correct number in the correct place.
+  - 🟡 Correct number but in the wrong place.
+  - ❌ Wrong number.
+- ⏱️ Timer mode for an extra challenge.
+- 🔥 Different difficulty levels (Easy, Medium, Hard, Master).
+- 🏆 Leaderboard to track best scores.
+- 🎭 Multiplayer mode where two players take turns guessing.
+
+**🛠️ Installation & How to Play:**
+1. 📅 Install dependencies: `pip install -r requirements.txt`
+2. ▶️ Run the script: `python game.py`
+3. 🎲 Decode the secret code using hints!
+
+![alt text](image.png)
 ---
-## 📷 Screenshots
-*(Include screenshots of your game here!)*
 
----
-## 🔧 Features
-✅ Fully functional Chess game in Pygame  
-✅ AI opponent powered by Stockfish  
-✅ Legal move highlighting  
-✅ Checkmate, stalemate, and draw detection  
-
----
-## ⚠️ Troubleshooting
-**Issue:** Pieces don't appear.  
-✔ Make sure you have the correct images in the `pieces/` folder.
-
-**Issue:** Stockfish is not working.  
-✔ Verify the `STOCKFISH_PATH` is correct.
-
----
-## 👥 Credits
-- **Stockfish Team** - For the amazing chess engine
-- **Pygame Community** - For the game framework
-
----
-## 📜 License
-This project is **open-source** under the MIT License.
-
-Happy Gaming! 🎉♟️
-
+### 📌 Note:
+- 🎨 Ensure all required assets (images, sounds, etc.) are in the correct directories.
+- ⚙️ Customize configurations if needed.
+- 🎮 Have fun playing! 🚀🔥🎉
