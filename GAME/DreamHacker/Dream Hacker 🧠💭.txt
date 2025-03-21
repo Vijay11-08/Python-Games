@@ -1,0 +1,54 @@
+==>Key Features & Implementation Plan
+
+- Dream Entry System – Different dream levels based on people's subconscious thoughts.
+- Dream Physics – Floating islands, cyberpunk cities, zero gravity, etc.
+- Memory Editing – Solve puzzles to extract, alter, or protect secrets.
+- Subconscious Monsters – AI-controlled enemies that chase and attack players.
+- Dream Codes – Players must decrypt codes to unlock hidden memories.
+- Avoid Waking the Host – Actions should not cause too much disturbance or the dream collapses.
+- Multiple Endings – Choices affect how the dream world and real world change.
+
+
+Step-by-Step Implementation
+
+1️⃣ Game Setup
+Use Pygame for graphics, movement, and animations.
+Load different dream levels (floating islands, cyberpunk world, etc.).
+Implement a player character with movement abilities.
+
+2️⃣ Dream Physics
+Modify gravity in different dream levels (floating, slow motion, reverse physics).
+Randomly shifting platforms in some levels.
+Use Box2D (Pymunk or Pygame physics engine) to create physics-based interactions.
+
+3️⃣ Memory Editing Mechanic
+Implement puzzle-solving elements (drag-and-drop pieces, typing codes).
+Create memory fragments that need to be found and reassembled.
+Allow players to alter key memories, which affects the game's ending.
+
+4️⃣ Subconscious Monsters (AI Enemies)
+AI patrols and chases the player when detected.
+Enemies have different behaviors (some stalk, some rush, some hide in shadows).
+Implement stealth mechanics (hiding in objects, freezing to avoid detection).
+
+5️⃣ Dream Codes (Puzzles)
+Create a system where players decrypt codes to access memories.
+Use randomized password mechanics or symbol matching mini-games.
+
+6️⃣ Avoid Waking the Host
+A "disturbance meter" increases when the player makes noise.
+If it reaches 100%, the dream collapses and the player loses.
+Players must move carefully and solve puzzles without alarming the dreamer.
+
+Features Implemented in This Code
+✅ Dream Environment – Dark mysterious world with hidden memory pieces.
+✅ AI Subconscious Monsters – Enemies chase the player when detected.
+✅ Memory Collection – Collect 3 hidden fragments to unlock a secret.
+✅ Stealth & Disturbance Meter – Players must move carefully to avoid waking the host.
+✅ Win & Lose Conditions – Win if all memories are collected, lose if the disturbance meter hits 100%.
+
+Next Steps to Improve
+🔹 Different Dream Worlds – Floating islands, futuristic cities, glitchy dreamscapes.
+🔹 Hacking Mini-Games – Solve puzzles to decrypt dream codes.
+🔹 Multiple Endings – Choices change how the dreamer’s real life is affected.
+🔹 Power-ups – Items to lower disturbance or distract monsters.
