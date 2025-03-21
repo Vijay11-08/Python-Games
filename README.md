@@ -15,7 +15,7 @@
 3. ▶️ Run the script: `python Chess.py`
 4. 🎭 Play against AI or manually move pieces!
 
-![alt text](image.png)
+![alt text](image-1.png)
 
 ---
 
