@@ -57,6 +57,11 @@ python math_quest.py
   - Press `R` 🔁 to restart the game.
 
 ---
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
 
 ## 🏆 How to Win 🎖️🚀
 - 🎯 Score as many points as possible by answering correctly.
