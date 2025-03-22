@@ -35,10 +35,25 @@ def draw_heart(surface, x, y, size=20):
 score = 0
 lives = 3  # 3 Health Hearts ❤️❤️❤️
 input_text = ""
-num1, num2 = random.randint(-10, 10), random.randint(-10, 10)
-operator = random.choice(["+", "-"])
-correct_answer = eval(f"{num1} {operator} {num2}")
 game_over = False
+
+def generate_question():
+    """Generates a new random math question with +, -, *, or /"""
+    global num1, num2, operator, correct_answer
+
+    operators = ["+", "-", "*", "/"]
+    operator = random.choice(operators)
+
+    if operator == "/":
+        # Ensure a division with an integer result
+        num2 = random.randint(1, 10)
+        num1 = num2 * random.randint(1, 10)
+    else:
+        num1, num2 = random.randint(-10, 10), random.randint(-10, 10)
+
+    correct_answer = eval(f"{num1} {operator} {num2}")
+
+generate_question()
 
 # Buttons
 button_rect = pygame.Rect(WIDTH // 2 - 50, HEIGHT // 2 + 50, 100, 40)
@@ -47,13 +62,6 @@ def draw_health():
     """Draws heart shapes for health representation"""
     for i in range(lives):
         draw_heart(screen, 10 + i * 35, 20)
-
-def new_question():
-    """Generates a new random math question"""
-    global num1, num2, operator, correct_answer
-    num1, num2 = random.randint(-10, 10), random.randint(-10, 10)
-    operator = random.choice(["+", "-"])
-    correct_answer = eval(f"{num1} {operator} {num2}")
 
 def draw_ui():
     """Draws all game UI elements"""
@@ -100,7 +108,7 @@ while running:
             if event.key == pygame.K_RETURN and not game_over:
                 if input_text.strip().lstrip("-").isdigit() and int(input_text) == correct_answer:
                     score += 10
-                    new_question()
+                    generate_question()
                 else:
                     lives -= 1
                     if lives == 0:
@@ -112,7 +120,7 @@ while running:
                 score = 0
                 lives = 3
                 game_over = False
-                new_question()
+                generate_question()
             else:
                 input_text += event.unicode
         
@@ -120,7 +128,7 @@ while running:
             if button_rect.collidepoint(event.pos) and not game_over:
                 if input_text.strip().lstrip("-").isdigit() and int(input_text) == correct_answer:
                     score += 10
-                    new_question()
+                    generate_question()
                 else:
                     lives -= 1
                     if lives == 0:
