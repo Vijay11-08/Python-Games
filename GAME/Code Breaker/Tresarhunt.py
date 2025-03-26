@@ -3,7 +3,7 @@ import customtkinter as ctk
 import tkinter as tk
 from tkinter import messagebox
 
-# Initialize the main window with colorful theme
+# Initialize the main window with a colorful theme
 ctk.set_appearance_mode("dark")  # Dark theme
 ctk.set_default_color_theme("green")  # Green theme
 
@@ -25,23 +25,23 @@ def check_guess():
         reset_game()
         return
 
-    # Generate hints with colorful indicators
-    hint = []
+    # Generate hints
+    attempts_listbox.insert("1.0", "🔢 Guess: ", "bold")  # Insert guess label first
+
     for i in range(4):
         if guess[i] == secret_code[i]:
-            hint.append("🟢")  # Correct place (Green)
+            attempts_listbox.insert("1.0", f"{guess[i]} (🟢)  ", "green")  # Correct place (Green)
         elif guess[i] in secret_code:
-            hint.append("🟡")  # Correct number, wrong place (Yellow)
+            attempts_listbox.insert("1.0", f"{guess[i]} (🟡)  ", "yellow")  # Correct number, wrong place (Yellow)
         else:
-            hint.append("🔴")  # Wrong number (Red)
+            attempts_listbox.insert("1.0", f"{guess[i]} (🔴)  ", "red")  # Wrong number (Red)
 
-    # Update attempts and UI
-    attempts -= 1  # Reduce attempts before updating UI
-    attempts_label.configure(text=f"🎯 Attempts Left: {attempts}", fg_color="#FF5733")
-    
-    # Insert guess results with emoji-friendly font
-    attempts_listbox.insert("1.0", f"🔢 Guess: {guess} → {' '.join(hint)}\n")
-    attempts_listbox.yview_moveto(0)  # Scroll to top
+    attempts_listbox.insert("1.0", "\n")  # New line for next guess
+    attempts_listbox.yview_moveto(1)  # Scroll to top
+
+    # Update attempts label
+    attempts -= 1
+    attempts_label.configure(text=f"🎯 Attempts Left: {attempts}", fg_color="#FF5733" if attempts <= 3 else "#00FF99")
 
     if attempts == 0:
         messagebox.showinfo("😢 Game Over", f"You lost! The secret code was {secret_code} 🎭")
@@ -65,7 +65,8 @@ app.configure(fg_color="#1F1F1F")  # Dark Background
 title_label = ctk.CTkLabel(app, text="🔐 Code Breaker 🔐", font=("Segoe UI Emoji", 24), text_color="#00FF99")
 title_label.pack(pady=15)
 
-entry_guess = ctk.CTkEntry(app, placeholder_text="💡 Enter 4-digit guess", font=("Segoe UI Emoji", 18), fg_color="#282828", text_color="#FFD700")
+# Entry box with white background
+entry_guess = ctk.CTkEntry(app, placeholder_text="💡 Enter 4-digit guess", font=("Segoe UI Emoji", 18), fg_color="white", text_color="black")
 entry_guess.pack(pady=10)
 
 check_button = ctk.CTkButton(app, text="✅ Check Guess", command=check_guess, fg_color="#008080", hover_color="#006666", font=("Arial", 16))
@@ -74,9 +75,15 @@ check_button.pack(pady=10)
 attempts_label = ctk.CTkLabel(app, text="🎯 Attempts Left: 10", font=("Arial", 16), text_color="#FFC300")
 attempts_label.pack(pady=5)
 
-# **Use tkinter.Text instead of CTkTextbox**
+# Textbox with color support
 attempts_listbox = tk.Text(app, height=10, width=50, font=("Segoe UI Emoji", 14), bg="#2B2B2B", fg="white", borderwidth=2)
 attempts_listbox.pack(pady=10)
+
+# Define color tags
+attempts_listbox.tag_configure("green", foreground="#00FF00", font=("Arial", 14, "bold"))  # Green for correct position
+attempts_listbox.tag_configure("yellow", foreground="#FFD700", font=("Arial", 14, "bold"))  # Yellow for wrong position
+attempts_listbox.tag_configure("red", foreground="#FF4500", font=("Arial", 14, "bold"))  # Red for incorrect digit
+attempts_listbox.tag_configure("bold", font=("Arial", 14, "bold"))
 
 reset_button = ctk.CTkButton(app, text="🔄 Restart Game", command=reset_game, fg_color="#FF4500", hover_color="#B22222", font=("Arial", 16))
 reset_button.pack(pady=10)
