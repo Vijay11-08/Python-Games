@@ -1,79 +1,79 @@
-# 🎮 Code Breaker - The Ultimate Puzzle Challenge 🔐  
+# 🎮💻 Code Breaker Game  🔥🚀
 
-## 🧠 Game Concept  
-**"Code Breaker"** is an exciting logic-based puzzle game where players must crack a secret code using hints! Sharpen your problem-solving skills while enjoying a fun and brain-teasing challenge!  
+## 🔥🎯 About the Game
+Code Breaker is a fun and challenging number-guessing game built using **Python** and **CustomTkinter**. The goal is to crack the secret code by guessing the correct digits within a limited number of attempts. 🧠🔢
 
-## 🕹️ How It Works  
-- The game generates a **4-digit secret code** 🔢  
-- Players enter their best guess and receive **color-coded hints** 🎨  
-  - 🟩 **(Green)** - Correct number **in the correct position** ✅  
-  - 🟨 **(Yellow)** - Correct number **but in the wrong position** 🔄  
-  - 🔴 **(Red)** - Number is **not in the secret code** ❌  
-- Use logic and strategy to **decode the number before running out of attempts!** 🎯  
+## 🚀✨ Features
+- 🎭 **Three Game Modes:** Easy (3-digit) 🔵, Medium (4-digit) 🟣, Hard (5-digit) 🔴
+- 🎯 **Limited Attempts:** Challenge yourself with different difficulty levels. 💪
+- 🔄 **Dynamic Hints:** Get hints with color-coded feedback:
+  - 🟢 **Green**: Correct digit in the correct position.
+  - 🟡 **Yellow**: Correct digit but in the wrong position.
+  - 🔴 **Red**: Incorrect digit.
+- 🎨 **Dark Theme UI:** Aesthetic and modern look using CustomTkinter. 🌙🎨
+- 🏆 **Victory Celebration:** Displays a congratulatory message when you win. 🎊🎉
+- 😢 **Game Over Alert:** Notifies you when you run out of attempts. 💔⏳
+- 🔄 **Restart Option:** Reset the game anytime to try again. ♻️🔃
+- 🎲 **Random Secret Code:** Each game session generates a unique secret code. 🔢🎲
+- 📝 **Guess History Tracker:** Keeps track of all your previous guesses with hints. 📜🧐
+- 🎮 **New Game Feature:** Earn points based on how fast you crack the code! ⏳🏅
 
-## 🎯 Game Levels  
-🔥 **Easy Mode** – 3-digit codes, **unlimited** attempts 😎  
-⚡ **Medium Mode** – 4-digit codes, **10** attempts 🏆  
-💀 **Hard Mode** – 5-digit codes, **7** attempts with fewer hints 💡  
-👑 **Master Mode** – Guess **a secret word** instead of numbers! 🄤  
+## 🎮🕹️ How to Play
+1. **Select a Mode:** Choose between Easy (3-digit) 🔵, Medium (4-digit) 🟣, or Hard (5-digit) 🔴.
+2. **Start the Game:** Click "🚀 Start Game" to generate a secret code.
+3. **Make a Guess:** Enter your number guess and click "✅ Check Guess".
+4. **Check Hints:**
+   - 🟢 **Correct Position**: Right digit in the right place.
+   - 🟡 **Wrong Position**: Right digit but wrong place.
+   - 🔴 **Incorrect**: Digit not in the code.
+5. **Win or Lose:**
+   - 🏆 If you guess the code correctly, you win! 🎉🥇
+   - 😢 If you run out of attempts, the secret code is revealed. 💔🔐
+6. **Earn Points:** The faster you guess, the more points you earn! ⏳💰
+7. **Restart Game:** Click "🔄 Restart Game" to play again. ♻️🔃
 
-## 🛠️ Features  
-✔️ **Interactive UI** – Built using `tkinter` for a smooth experience 🖥️  
-✔️ **Timed Challenges** – Solve under pressure ⏳  
-✔️ **Leaderboard** – Track **high scores & best times** 🏅  
-✔️ **Multiplayer Mode** – Take turns setting and guessing codes 👥  
-✔️ **Randomized Codes** – Ensures unique puzzles every time 🎲  
+## 📜🛠️ Installation Guide
+### 📌 Prerequisites
+- Python 3.x 🐍
+- `customtkinter` library 📦
 
-## 🎲 Example of Gameplay  
-```
-Secret Code: ????  
-Player's Guess: 4523  
-Hint: 🟩 🟨 🔴 🔴  (One number is correct & in place, one is misplaced, two are wrong)  
-```
-🔍 Keep guessing using hints until you **crack the code!** 🎯  
+### 📥 Steps
+1. Clone the repository or download the script. 📂
+   ```bash
+   git clone https://github.com/yourusername/code-breaker-game.git
+   cd code-breaker-game
+   ```
+2. Install the required dependencies. 📦⚙️
+   ```bash
+   pip install customtkinter
+   ```
+3. Run the script. 🚀
+   ```bash
+   python code_breaker.py
+   ```
+🌟 _Enjoy cracking the code!_ 🔐🎊🚀
 
-## 🚀 Installation & Setup  
-```bash
-# Clone the repo
-git clone https://github.com/your-username/code-breaker.git
-
-# Navigate to project directory
-cd code-breaker
-
-# Install dependencies (Python required)
-pip install -r requirements.txt
-
-# Run the game
-python game.py
-```  
-
-## 🏢 Technologies Used  
-🔹 **Python** – Core logic & backend  
-🔹 **tkinter / pygame** – Graphical user interface 🎨  
-🔹 **SQLite** – Store leaderboard data 📊  
-
-## 🔥 Future Enhancements  
-🔜 **Online Multiplayer** – Challenge friends remotely 🌍  
-🔜 **More Difficulty Levels** – Extreme mode with 6+ digits 🔢  
-🔜 **Custom Themes** – Players can pick different colors & styles 🎭  
-
-## 💡 Contributing  
-Want to improve the game? **Pull requests are welcome!** 🤝  
-
----
-
-🎡 **Get ready to test your brainpower!** 🧠💡 Start breaking codes NOW! 🔐🎯  
+## Game Look
 
 ![alt text](image.png)
 
+## 🟢 Easy Mode (3-digit)
 ![alt text](image-1.png)
 ![alt text](image-9.png)
+
+## 🟡 Medium Mode (4-digit)
 
 ![alt text](image-2.png)
 ![alt text](image-7.png)
 
+## 🔴 Hard Mode (5-digit)
+
 ![alt text](image-3.png)
 ![alt text](image-8.png)
+
+
+
+
 
 
 
