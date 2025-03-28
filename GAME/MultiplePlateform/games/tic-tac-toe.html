@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: radial-gradient(circle, #1a1a2e, #16213e);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+            color: #fff;
+        }
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 15px #e94560;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 120px);
+            grid-template-rows: repeat(3, 120px);
+            gap: 10px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+        .cell {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            border: 2px solid #fff;
+            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .cell:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+        .cell.disabled {
+            pointer-events: none;
+            animation: pop 0.3s ease-in-out;
+        }
+        @keyframes pop {
+            0% { transform: scale(0.8); }
+            100% { transform: scale(1); }
+        }
+        .win {
+            background: rgba(233, 69, 96, 0.7) !important;
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.9);
+        }
+        .win-line {
+            position: absolute;
+            height: 5px;
+            background: red;
+            transition: width 0.5s ease-in-out;
+            box-shadow: 0 0 15px red;
+        }
+        .buttons button {
+            padding: 12px 24px;
+            font-size: 18px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #e94560;
+            color: white;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.5);
+            transition: 0.3s;
+        }
+        .buttons button:hover {
+            background: #ff165d;
+            transform: scale(1.1);
+        }
+        #status {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-top: 20px;
+            text-shadow: 0 0 10px #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tic-Tac-Toe</h1>
+    <div id="status">Player X's turn</div>
+    <div class="board" id="board"></div>
+    <div class="buttons">
+        <button onclick="resetGame()">Restart Game</button>
+        <button onclick="window.history.back()">Back</button>
+        <button onclick="window.location.href='../index.html'">🏠 Home</button>
+    </div>
+
+    <script>
+        const board = document.getElementById("board");
+        const status = document.getElementById("status");
+        let currentPlayer = "X";
+        let gameBoard = Array(9).fill("");
+
+        function createBoard() {
+            board.innerHTML = "";
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement("div");
+                cell.classList.add("cell");
+                cell.dataset.index = i;
+                cell.addEventListener("click", makeMove);
+                board.appendChild(cell);
+            }
+        }
+
+        function makeMove(event) {
+            const index = event.target.dataset.index;
+            if (!gameBoard[index]) {
+                gameBoard[index] = currentPlayer;
+                event.target.textContent = currentPlayer;
+                event.target.classList.add("disabled");
+                
+                const winnerPattern = checkWinner();
+                if (winnerPattern) {
+                    status.textContent = `🎉 Player ${currentPlayer} Wins! 🎉`;
+                    highlightWin(winnerPattern);
+                    return;
+                }
+                if (gameBoard.every(cell => cell)) {
+                    status.textContent = "🤝 It's a Draw!";
+                    return;
+                }
+                currentPlayer = currentPlayer === "X" ? "O" : "X";
+                status.textContent = `Player ${currentPlayer}'s turn`;
+            }
+        }
+
+        function checkWinner() {
+            const winPatterns = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+            for (const pattern of winPatterns) {
+                const [a, b, c] = pattern;
+                if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+                    return pattern;
+                }
+            }
+            return null;
+        }
+
+        function highlightWin(pattern) {
+            const cells = document.querySelectorAll(".cell");
+            pattern.forEach(index => cells[index].classList.add("win"));
+            drawWinLine(pattern);
+        }
+
+        function drawWinLine(pattern) {
+            const cells = document.querySelectorAll(".cell");
+            const boardRect = board.getBoundingClientRect();
+            
+            const [a, b, c] = pattern;
+            const cellA = cells[a].getBoundingClientRect();
+            const cellC = cells[c].getBoundingClientRect();
+
+            const startX = cellA.left + cellA.width / 2 - boardRect.left;
+            const startY = cellA.top + cellA.height / 2 - boardRect.top;
+            const endX = cellC.left + cellC.width / 2 - boardRect.left;
+            const endY = cellC.top + cellC.height / 2 - boardRect.top;
+
+            let winLine = document.querySelector(".win-line");
+            if (!winLine) {
+                winLine = document.createElement("div");
+                winLine.classList.add("win-line");
+                board.appendChild(winLine);
+            }
+
+            winLine.style.width = "0px";
+            winLine.style.left = `${startX}px`;
+            winLine.style.top = `${startY}px`;
+            winLine.style.transform = `rotate(${Math.atan2(endY - startY, endX - startX) * (180 / Math.PI)}deg)`;
+            winLine.style.transformOrigin = "0 50%";
+
+            setTimeout(() => {
+                winLine.style.width = `${Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2)}px`;
+            }, 100);
+        }
+
+        function resetGame() {
+            gameBoard.fill("");
+            currentPlayer = "X";
+            status.textContent = "Player X's turn";
+            document.querySelector(".win-line")?.remove();
+            createBoard();
+        }
+
+        createBoard();
+    </script>
+</body>
+</html>

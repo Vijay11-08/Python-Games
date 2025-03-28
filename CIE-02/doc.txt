@@ -1,0 +1,80 @@
+ Code Breaker Game - Documentation  
+
+ 1. Introduction  
+The Code Breaker Game is a fun and interactive number-guessing game where players try to crack a secret code within a limited number of attempts. The game offers three difficulty levels (Easy, Medium, Hard) and provides real-time feedback using emoji indicators. The user interface has a neon-themed design with animations for a futuristic feel.  
+
+
+
+ 2. Features  
+✔️ Difficulty Levels:  
+   - 🔥 Easy (3-digit code, 5 attempts)  
+   - ⚡ Medium (4-digit code, 7 attempts)  
+   - 💀 Hard (5-digit code, 9 attempts)  
+   
+✔️ Real-time Emoji Feedback:  
+   - 🟢 Correct digit & correct position  
+   - 🟡 Correct digit but wrong position  
+   - 🔴 Incorrect digit  
+
+✔️ Neon-Themed UI:  
+   - Animated glowing effects  
+   - Stylish buttons and elements  
+
+✔️ Dynamic Game Restart:  
+   - Shows the secret code after the game ends  
+   - Option to start a new game  
+
+
+
+ 3. Technologies Used  
+- Frontend: HTML, CSS, JavaScript  
+- Styling: Google Fonts, CSS animations  
+- Interactivity: JavaScript (DOM manipulation, event handling)  
+
+
+
+ 4. Code Structure  
+
+ 4.1 HTML (Structure)  
+The game UI consists of:  
+- Title & Difficulty Selection  
+- Game Box (input field for guesses, attempt counter, result display)  
+- New Game Button (appears after game ends)  
+
+ 4.2 CSS (Design & Animations)  
+- Neon Effects: Animated glowing box shadows  
+- Hover Effects: Buttons glow when hovered  
+- Dark Theme: Black background with neon cyan/magenta borders  
+
+ 4.3 JavaScript (Game Logic)  
+ Key Functions:  
+1. `startGame()` → Initializes the game based on difficulty level.  
+2. `checkGuess()` → Compares the guess with the secret code, provides feedback, and tracks attempts.  
+3. `showSecretCode()` → Displays the secret code after all attempts are used.  
+4. `resetGame()` → Resets the game for a new round.  
+
+
+
+ 5. How to Play  
+1️⃣ Select Difficulty (Easy, Medium, Hard).  
+2️⃣ Click "Start Game" – The game generates a secret code.  
+3️⃣ Enter a Guess in the input box and click "Check".  
+4️⃣ Get Feedback (🟢🟡🔴) based on your guess.  
+5️⃣ Crack the Code before you run out of attempts!  
+6️⃣ See the Secret Code if you lose, then click "New Game" to try again.  
+
+
+
+ 6. Future Enhancements  
+🔹 Add a timer for a more challenging experience.  
+🔹 Implement leaderboards to track player performance.  
+🔹 Introduce hints to assist players.  
+🔹 Make it multiplayer with turn-based mode.  
+
+
+
+ 7. Conclusion  
+The Code Breaker Game is a great way to challenge logical thinking while enjoying a visually appealing neon interface. With structured game mechanics and interactive feedback, it ensures an engaging user experience.  
+
+🚀 Happy Code Breaking! 🔐
+

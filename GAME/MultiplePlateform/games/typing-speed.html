@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Speed Test ⌨</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: radial-gradient(circle, #0f0c29, #302b63, #24243e);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #sentence, #highlighted-text {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        button {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(255, 75, 75, 0.5);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #ff4b2b, #ff416c);
+            box-shadow: 0 6px 15px rgba(255, 75, 75, 0.7);
+        }
+
+        .speed-info {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Typing Speed Test ⌨</h1>
+        <p id="sentence"></p>
+        <p id="highlighted-text"></p>
+        <textarea id="userInput" placeholder="Start typing..." oninput="startTyping()"></textarea>
+        <p class="speed-info" id="timer">Time: 0s</p>
+        <p class="speed-info" id="speed">Speed: 0 WPM</p>
+        <button onclick="restartGame()">Restart 🔄</button>
+        <button onclick="window.location.href='../index.html'">🏠 Home</button>
+    </div>
+
+    <script>
+        const sentences = [
+            "The quick brown fox jumps over the lazy dog.",
+            "Coding is fun when you practice regularly.",
+            "Speed typing tests improve keyboard skills.",
+            "Javascript is a powerful programming language."
+        ];
+        let startTime, sentenceText, timerInterval;
+
+        function startTyping() {
+            if (!startTime) {
+                startTime = new Date();
+                timerInterval = setInterval(updateTimer, 1000);
+            }
+            let userInput = document.getElementById("userInput").value;
+            updateHighlightedText(userInput);
+            calculateSpeed(userInput);
+        }
+
+        function updateHighlightedText(userInput) {
+            let highlighted = "";
+            for (let i = 0; i < sentenceText.length; i++) {
+                if (i < userInput.length) {
+                    highlighted += `<span style="color: ${userInput[i] === sentenceText[i] ? 'lightgreen' : 'red'}">${sentenceText[i]}</span>`;
+                } else {
+                    highlighted += sentenceText[i];
+                }
+            }
+            document.getElementById("highlighted-text").innerHTML = highlighted;
+        }
+
+        function calculateSpeed(userInput) {
+            let wordsTyped = userInput.trim().split(" ").length;
+            let timeElapsed = (new Date() - startTime) / 1000;
+            let speed = Math.round((wordsTyped / timeElapsed) * 60);
+            document.getElementById("speed").innerText = `Speed: ${speed || 0} WPM`;
+        }
+
+        function updateTimer() {
+            let timeElapsed = Math.floor((new Date() - startTime) / 1000);
+            document.getElementById("timer").innerText = `Time: ${timeElapsed}s`;
+        }
+
+        function restartGame() {
+            clearInterval(timerInterval);
+            document.getElementById("userInput").value = "";
+            document.getElementById("highlighted-text").innerHTML = "";
+            document.getElementById("speed").innerText = "Speed: 0 WPM";
+            document.getElementById("timer").innerText = "Time: 0s";
+            startTime = null;
+            sentenceText = sentences[Math.floor(Math.random() * sentences.length)];
+            document.getElementById("sentence").innerText = sentenceText;
+        }
+        restartGame();
+    </script>
+</body>
+</html>

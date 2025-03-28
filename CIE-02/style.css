@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 500px;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid cyan;
+    box-shadow: 0 0 20px cyan;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px cyan;
+    }
+    to {
+        box-shadow: 0 0 20px magenta;
+    }
+}
+
+button {
+    background: linear-gradient(45deg, cyan, magenta);
+    color: white;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-shadow: 0 0 5px #000;
+    transition: 0.3s;
+}
+
+button:hover {
+    box-shadow: 0 0 15px cyan;
+    transform: scale(1.1);
+}
+
+#result p {
+    font-size: 18px;
+    text-shadow: 0 0 10px cyan;
+}
+
+input {
+    font-size: 16px;
+    padding: 10px;
+    border: 2px solid cyan;
+    border-radius: 5px;
+    background: black;
+    color: white;
+    text-align: center;
+    box-shadow: 0 0 10px cyan;
+}
+
+select {
+    background: black;
+    color: cyan;
+    font-size: 16px;
+    border: 2px solid cyan;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#attempts {
+    font-size: 18px;
+    margin-top: 10px;
+    text-shadow: 0 0 10px magenta;
+}
+
+#codeBox {
+    display: none;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    background: rgba(255, 0, 255, 0.3);
+    color: cyan;
+    border: 2px solid cyan;
+    border-radius: 10px;
+    box-shadow: 0 0 20px magenta;
+}
+
+@keyframes neonBackground {
+    0% { background-color: #001F3F; }
+    50% { background-color: #0F0040; }
+    100% { background-color: #001F3F; }
+}
+
+body {
+    animation: neonBackground 3s infinite alternate;
+}

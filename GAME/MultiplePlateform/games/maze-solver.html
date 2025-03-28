@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maze Solver 🏁</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #000428, #004e92);
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 20px;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+        }
+        .maze-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        canvas {
+            border: 6px solid #fff;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+        /* Buttons */
+        .btn-container {
+            margin-top: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            color: #fff;
+            text-transform: uppercase;
+            box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.3);
+        }
+        #restartBtn {
+            background: #ff4757;
+        }
+        #restartBtn:hover {
+            background: #e84118;
+        }
+        .home-btn {
+            background: #27ae60;
+        }
+        .home-btn:hover {
+            background: #1e8449;
+        }
+    </style>
+</head>
+<body>
+    <h1>⚡ Neon Maze Solver 🏁</h1>
+    <p>Use arrow keys to move the glowing ball to the goal!</p>
+    <div class="maze-container">
+        <canvas id="mazeCanvas"></canvas>
+    </div>
+    <p id="winMessage" style="display: none; font-size: 1.5rem; color: yellow; font-weight: bold;"></p>
+
+    <div class="btn-container">
+        <button id="restartBtn" onclick="restartGame()">🔄 Restart Game</button>
+        <button class="home-btn" onclick="window.location.href='../index.html'">🏠 Home</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("mazeCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const tileSize = 40;
+        const rows = 11;
+        const cols = 11;
+        canvas.width = cols * tileSize;
+        canvas.height = rows * tileSize;
+
+        let player, goal, maze;
+
+        function generateMaze() {
+            let maze = Array.from({ length: rows }, () => Array(cols).fill(1));
+            let stack = [[1, 1]];
+            maze[1][1] = 0;
+
+            const directions = [[0, -2], [0, 2], [-2, 0], [2, 0]];
+            while (stack.length > 0) {
+                let [x, y] = stack.pop();
+                directions.sort(() => Math.random() - 0.5);
+                for (const [dx, dy] of directions) {
+                    let newX = x + dx;
+                    let newY = y + dy;
+                    if (newX > 0 && newY > 0 && newX < cols - 1 && newY < rows - 1 && maze[newY][newX] === 1) {
+                        maze[y + dy / 2][x + dx / 2] = 0;
+                        maze[newY][newX] = 0;
+                        stack.push([newX, newY]);
+                    }
+                }
+            }
+            return maze;
+        }
+
+        function drawMaze() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    if (maze[row][col] === 1) {
+                        ctx.fillStyle = "#1e272e";
+                        ctx.fillRect(col * tileSize, row * tileSize, tileSize, tileSize);
+                    }
+                }
+            }
+            // Glowing Player
+            ctx.shadowColor = "red";
+            ctx.shadowBlur = 20;
+            ctx.fillStyle = "red";
+            ctx.beginPath();
+            ctx.arc(player.x * tileSize + tileSize / 2, player.y * tileSize + tileSize / 2, tileSize / 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // Glowing Goal
+            ctx.shadowColor = "lime";
+            ctx.shadowBlur = 15;
+            ctx.fillStyle = "lime";
+            ctx.fillRect(goal.x * tileSize + 5, goal.y * tileSize + 5, tileSize - 10, tileSize - 10);
+            ctx.shadowBlur = 0;
+        }
+
+        function movePlayer(dx, dy) {
+            let newX = player.x + dx;
+            let newY = player.y + dy;
+            if (maze[newY] && maze[newY][newX] === 0) {
+                player.x = newX;
+                player.y = newY;
+                drawMaze();
+                checkWin();
+            }
+        }
+
+        function checkWin() {
+    if (player.x === goal.x && player.y === goal.y) {
+        const message = document.getElementById("winMessage");
+        message.textContent = "🎉 Victory! You reached the goal! 🎉";
+        message.style.display = "block";
+        setTimeout(() => {
+            message.style.display = "none";
+            restartGame();
+        }, 2000);
+    }
+}
+
+        function restartGame() {
+            maze = generateMaze();
+            player = { x: 1, y: 1 };
+            goal = { x: cols - 2, y: rows - 2 };
+            drawMaze();
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowUp") movePlayer(0, -1);
+            if (e.key === "ArrowDown") movePlayer(0, 1);
+            if (e.key === "ArrowLeft") movePlayer(-1, 0);
+            if (e.key === "ArrowRight") movePlayer(1, 0);
+        });
+
+        restartGame();
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Game Platform 🎮</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container with Glassmorphism */
+        .container {
+            max-width: 850px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Heading Styling */
+        h1 {
+            font-size: 36px;
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 18px;
+            color: #f0f0f0;
+            margin-bottom: 20px;
+        }
+
+        /* Game Button Grid */
+        .game-menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        /* Buttons */
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background: #fff;
+            color: #ff4e50;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .game-menu {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Welcome to Multi Game Platform 🚀</h1>
+        <p>Select a game to play and have fun!</p>
+        <div class="game-menu">
+            <button onclick="navigateTo('games/math-quiz.html')">Math Quiz 🧮</button>
+            <button onclick="navigateTo('games/guess-number.html')">Guess the Number 🔢</button>
+            <button onclick="navigateTo('games/rock-paper-scissors.html')">Rock Paper Scissors ✊✋✌</button>
+            <button onclick="navigateTo('games/shape-matching.html')">Shape Matching 🔷🔺</button>
+            <button onclick="navigateTo('games/tic-tac-toe.html')">Tic-Tac-Toe ❌⭕</button>
+            <button onclick="navigateTo('games/memory-card.html')">Memory Card Game 🃏</button>
+            <button onclick="navigateTo('games/maze-solver.html')">Maze Solver 🏁</button>
+            <button onclick="navigateTo('games/word-scramble.html')">Word Scramble 🔠</button>
+            <button onclick="navigateTo('games/typing-speed.html')">Typing Speed Test ⌨</button>
+            <button onclick="navigateTo('games/balloon-pop.html')">Balloon Pop Math 🎈</button>
+        </div>
+    </div>
+
+    <script>
+        function navigateTo(gameUrl) {
+            window.location.href = gameUrl;
+        }
+    </script>
+</body>
+</html>
+
+

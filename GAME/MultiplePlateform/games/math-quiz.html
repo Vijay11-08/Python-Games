@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz</title>
+    <style>
+        /* Stunning Background */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #141E30, #243B55);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* Glassmorphism Container */
+.container {
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Title */
+h1 {
+    color: #FFD700;
+    font-size: 36px;
+}
+
+/* Question Display */
+#question {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+/* Input Field */
+input[type="number"] {
+    padding: 12px;
+    font-size: 18px;
+    width: 80%;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    outline: none;
+}
+
+/* Placeholder Styling */
+input::placeholder {
+    color: #ddd;
+}
+
+/* Buttons */
+button {
+    background: linear-gradient(45deg, #FFD700, #FF8C00);
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: all 0.3s;
+    font-weight: bold;
+    color: white;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 1);
+}
+
+/* Feedback Message */
+#feedback {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+    animation: popUp 0.5s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popUp {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧮 Math Quiz</h1>
+        <p>Solve the math questions below!</p>
+        <div id="question"></div>
+        <input type="number" id="answer" placeholder="Enter your answer">
+        <button onclick="checkAnswer()">Submit</button>
+        <p id="feedback"></p>
+        <button onclick="nextQuestion()">Next Question</button>
+        <br>
+        <button onclick="window.location.href='../index.html'">🔙 Back to Home</button>
+    </div>
+    <script>
+        let num1, num2, operator, correctAnswer;
+
+function generateQuestion() {
+    num1 = Math.floor(Math.random() * 10) + 1;
+    num2 = Math.floor(Math.random() * 10) + 1;
+    let operators = ['+', '-', '*', '/'];
+    operator = operators[Math.floor(Math.random() * operators.length)];
+    
+    switch(operator) {
+        case '+': correctAnswer = num1 + num2; break;
+        case '-': correctAnswer = num1 - num2; break;
+        case '*': correctAnswer = num1 * num2; break;
+        case '/': correctAnswer = (num1 / num2).toFixed(2); break;
+    }
+    document.getElementById('question').innerHTML = `${num1} ${operator} ${num2} = ?`;
+}
+
+function checkAnswer() {
+    let userAnswer = document.getElementById('answer').value;
+    let feedback = document.getElementById('feedback');
+
+    if (parseFloat(userAnswer) === parseFloat(correctAnswer)) {
+        feedback.innerHTML = "✅ Correct! Well done!";
+        feedback.style.color = "lime";
+    } else {
+        feedback.innerHTML = `❌ Wrong! The correct answer was ${correctAnswer}.`;
+        feedback.style.color = "red";
+    }
+}
+
+function nextQuestion() {
+    document.getElementById('answer').value = "";
+    document.getElementById('feedback').innerHTML = "";
+    generateQuestion();
+}
+
+window.onload = generateQuestion;
+
+    </script>
+</body>
+</html>

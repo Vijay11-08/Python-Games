@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shape Matching Game</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .shape-slot, .shape {
+            width: 120px;
+            height: 120px;
+            margin: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .shape-slot {
+            border: 4px dashed #fff;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .shape {
+            cursor: grab;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .shape:active {
+            cursor: grabbing;
+            transform: scale(1.1);
+        }
+
+        .circle { background: #ff4757; border-radius: 50%; }
+        .square { background: #1e90ff; }
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 120px solid #2ed573;
+        }
+
+        #winMessage {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffeb3b;
+            margin-top: 20px;
+            display: none;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            background: #ffcc00;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        button:hover {
+            background: #ff5733;
+            color: white;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Shape Matching Game 🔷🔺</h1>
+    <p>Drag and drop the shapes into their matching slots!</p>
+    
+    <div class="game-container" id="slots-container">
+        <div class="shape-slot circle" id="circle-slot"></div>
+        <div class="shape-slot square" id="square-slot"></div>
+        <div class="shape-slot triangle" id="triangle-slot"></div>
+    </div>
+
+    <div class="game-container" id="shapes-container">
+        <div class="shape circle" id="circle" draggable="true"></div>
+        <div class="shape square" id="square" draggable="true"></div>
+        <div class="shape triangle" id="triangle" draggable="true"></div>
+    </div>
+
+    <p id="winMessage">🎉 Congratulations! You matched all the shapes correctly! 🎉</p>
+    
+    <div class="buttons">
+        <button onclick="restartGame()">Restart 🔄</button>
+        <button class="btn home-btn" onclick="window.location.href='../index.html'">🏠 Back to Home</button>
+    </div>
+
+    <script>
+        const shapes = document.querySelectorAll('.shape');
+        const slots = document.querySelectorAll('.shape-slot');
+        let matchedShapes = 0;
+
+        shapes.forEach(shape => {
+            shape.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text', e.target.id);
+            });
+        });
+
+        slots.forEach(slot => {
+            slot.addEventListener('dragover', (e) => e.preventDefault());
+            
+            slot.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const shapeId = e.dataTransfer.getData('text');
+                const draggedShape = document.getElementById(shapeId);
+                
+                if (slot.id === `${shapeId}-slot` && !slot.hasChildNodes()) {
+                    slot.appendChild(draggedShape);
+                    draggedShape.style.position = 'static';
+                    draggedShape.draggable = false;
+                    matchedShapes++;
+                    checkWin();
+                }
+            });
+        });
+
+        function checkWin() {
+            if (matchedShapes === shapes.length) {
+                document.getElementById('winMessage').style.display = 'block';
+                setTimeout(randomizeShapes, 2000);
+            }
+        }
+
+        function randomizeShapes() {
+            const colors = ['#ff4757', '#1e90ff', '#2ed573', '#f9ca24', '#9b59b6'];
+            shapes.forEach(shape => {
+                shape.style.background = colors[Math.floor(Math.random() * colors.length)];
+                document.getElementById('shapes-container').appendChild(shape);
+                shape.draggable = true;
+            });
+            matchedShapes = 0;
+            document.getElementById('winMessage').style.display = 'none';
+        }
+
+        function restartGame() {
+            location.reload();
+        }
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

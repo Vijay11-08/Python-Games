@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            text-align: center;
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            color: #ffcc00;
+            font-size: 32px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        select, input, button {
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 10px;
+            border: none;
+            text-align: center;
+            margin: 10px 0;
+            width: 90%;
+        }
+        select, input {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            outline: none;
+        }
+        button {
+            background: #ffcc00;
+            color: #1e3c72;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #ff5733;
+            color: white;
+            transform: scale(1.05);
+        }
+        #feedback {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .guess-box span {
+            font-size: 24px;
+            font-weight: bold;
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            margin: 5px;
+            text-align: center;
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔢 Guess the Number</h1>
+        <p>Select difficulty level:</p>
+        <select id="difficulty" onchange="setDifficulty()">
+            <option value="3">Easy (3-digit, 5 attempts)</option>
+            <option value="4">Medium (4-digit, 7 attempts)</option>
+            <option value="5">Hard (5-digit, 9 attempts)</option>
+        </select>
+        <p>Enter your guess:</p>
+        <input type="number" id="guess" placeholder="Enter your guess">
+        <button onclick="checkGuess()">Submit</button>
+        <p id="attempts"></p>
+        <p id="feedback"></p>
+        <button onclick="resetGame()">Play Again</button>
+        <br>
+        <button onclick="window.location.href='../index.html'">🔙 Back to Home</button>
+    </div>
+    <script>
+        let randomNumber, attemptsLeft, digitCount = 3;
+        const maxAttempts = { 3: 5, 4: 7, 5: 9 };
+
+        function setDifficulty() {
+            digitCount = parseInt(document.getElementById('difficulty').value);
+            resetGame();
+        }
+
+        function generateNumber() {
+            let min = Math.pow(10, digitCount - 1);
+            let max = Math.pow(10, digitCount) - 1;
+            randomNumber = String(Math.floor(Math.random() * (max - min + 1)) + min);
+            attemptsLeft = maxAttempts[digitCount];
+            document.getElementById('attempts').innerText = `Attempts Left: ${attemptsLeft}`;
+        }
+
+        function checkGuess() {
+            let userGuess = document.getElementById('guess').value;
+            let feedback = document.getElementById('feedback');
+            if (userGuess.length !== digitCount) {
+                feedback.innerHTML = `❌ Enter a ${digitCount}-digit number!`;
+                feedback.style.color = "red";
+                return;
+            }
+
+            attemptsLeft--;
+            document.getElementById('attempts').innerText = `Attempts Left: ${attemptsLeft}`;
+
+            let feedbackHTML = "";
+            for (let i = 0; i < digitCount; i++) {
+                if (userGuess[i] === randomNumber[i]) {
+                    feedbackHTML += `<span style="background:green; color:white;">${userGuess[i]}</span>`;
+                } else if (randomNumber.includes(userGuess[i])) {
+                    feedbackHTML += `<span style="background:yellow; color:black;">${userGuess[i]}</span>`;
+                } else {
+                    feedbackHTML += `<span style="background:red; color:white;">${userGuess[i]}</span>`;
+                }
+            }
+            feedback.innerHTML = feedbackHTML;
+
+            if (userGuess === randomNumber) {
+                feedback.innerHTML = `🎉 Correct! You guessed it in ${maxAttempts[digitCount] - attemptsLeft} attempts!`;
+                feedback.style.color = "green";
+            } else if (attemptsLeft === 0) {
+                feedback.innerHTML = `❌ Out of attempts! The number was ${randomNumber}.`;
+                feedback.style.color = "red";
+            }
+        }
+
+        function resetGame() {
+            generateNumber();
+            document.getElementById('guess').value = "";
+            document.getElementById('feedback').innerHTML = "";
+        }
+
+        window.onload = generateNumber;
+    </script>
+</body>
+</html>

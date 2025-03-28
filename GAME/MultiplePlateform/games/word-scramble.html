@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Scramble 🔠</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: radial-gradient(circle, #1a1a2e, #16213e);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 20px;
+            text-shadow: 0 0 10px #ff9ff3;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .scrambled-word {
+            font-size: 26px;
+            font-weight: bold;
+            color: #f8f8f8;
+            text-shadow: 0 0 10px #ff9ff3;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            font-size: 18px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            text-align: center;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        button {
+            background: #00cec9;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            transition: 0.3s;
+            font-size: 16px;
+            box-shadow: 0 0 10px rgba(0, 206, 201, 0.5);
+        }
+
+        button:hover {
+            background: #00b894;
+            box-shadow: 0 0 15px rgba(0, 206, 201, 0.8);
+        }
+
+        .hint {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #ff9ff3;
+        }
+
+        .message {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #ff7675;
+            text-shadow: 0 0 10px #ff7675;
+        }
+    </style>
+</head>
+<body>
+    <h1>Word Scramble 🔠</h1>
+    <p>Unscramble the letters to form a valid word!</p>
+    <div class="game-container">
+        <p class="scrambled-word" id="scrambledWord"></p>
+        <input type="text" id="userInput" placeholder="Your Answer">
+        <button onclick="checkAnswer()">Check Answer ✅</button>
+        <button onclick="restartGame()">Restart 🔄</button>
+        <p class="hint">Hint: <span id="hint"></span></p>
+        <p class="message" id="message"></p>
+
+        <button onclick="window.location.href='../index.html'">🏠 Back to Home</button>
+    </div>
+    
+    <script>
+        const words = [
+            { word: "apple", hint: "A sweet red fruit 🍎" },
+            { word: "banana", hint: "A long yellow fruit 🍌" },
+            { word: "carrot", hint: "An orange vegetable 🥕" },
+            { word: "elephant", hint: "A large grey animal 🐘" },
+            { word: "tiger", hint: "A wild cat 🐅" },
+            { word: "audi", hint: "A luxury car 🚗" },
+            { word: "ducati", hint: "A famous bike brand 🏍️" },
+            { word: "laptop", hint: "A portable computer 💻" },
+            { word: "guitar", hint: "A musical instrument 🎸" },
+            { word: "chocolate", hint: "A sweet brown treat 🍫" }
+        ];
+
+        let selectedWord, scrambledWord;
+
+        function shuffleWord(word) {
+            return word.split("").sort(() => Math.random() - 0.5).join("");
+        }
+
+        function generateWord() {
+            const randomIndex = Math.floor(Math.random() * words.length);
+            selectedWord = words[randomIndex].word;
+            scrambledWord = shuffleWord(selectedWord);
+            document.getElementById("scrambledWord").innerText = scrambledWord;
+            document.getElementById("hint").innerText = words[randomIndex].hint;
+            document.getElementById("message").innerText = "";
+        }
+
+        function checkAnswer() {
+            let userAnswer = document.getElementById("userInput").value.toLowerCase();
+            let message = document.getElementById("message");
+            if (userAnswer === selectedWord) {
+                message.innerText = "🎉 Correct! You unscrambled the word!";
+                message.style.color = "#00ff00";
+            } else {
+                message.innerText = "❌ Incorrect! Try again.";
+                message.style.color = "#ff7675";
+            }
+        }
+
+        function restartGame() {
+            document.getElementById("userInput").value = "";
+            generateWord();
+        }
+
+        generateWord();
+    </script>
+</body>
+</html>
